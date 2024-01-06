@@ -1,25 +1,24 @@
-(define (divides? a b)
-  (= (remainder b a) 0))
-
 (define (even? n)
   (divides? 2 n))
 
 (define (odd? n)
   (not (even? n)))
 
-(define (smallest-divisor n)
-  (find-divisor n 2))
-
-(define (find-divisor n test-divisor)
-  (define (next a)
-    (if (= a 2)
-        3
-        (+ a 2)))
-  (cond ((> (square test-divisor) n) n)
-        ((divides? test-divisor n) test-divisor)
-        (else (find-divisor n (next test-divisor)))))
-
 (define (prime? n)
+  (define (divides? a b)
+    (= (remainder b a) 0)) 
+  
+  (define (smallest-divisor n)
+    (find-divisor n 2))
+
+  (define (find-divisor n test-divisor)
+    (define (next a)
+      (if (= a 2)
+          3
+          (+ a 2)))
+    (cond ((> (square test-divisor) n) n)
+          ((divides? test-divisor n) test-divisor)
+          (else (find-divisor n (next test-divisor)))))
   (= n (smallest-divisor n)))
 
 (define (miller-rabin-test n)
