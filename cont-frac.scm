@@ -21,3 +21,12 @@
 (cont-frac (lambda (i) 1.0)
            (lambda (i) 1.0)
            9)
+
+(define (tan-cf x k)
+  (cont-frac (lambda (i) (if (= i 0)
+                        x
+                        (- (square x))))
+             (lambda (i) (+ 1 (* 2 i)))
+             k))
+
+(tan-cf 5 10)
